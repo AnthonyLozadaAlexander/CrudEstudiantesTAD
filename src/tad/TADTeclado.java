@@ -1,4 +1,4 @@
-package tareaTutoria27DeAbril;
+package tad;
 
 import java.io.BufferedReader;
 import java.io.IOException;

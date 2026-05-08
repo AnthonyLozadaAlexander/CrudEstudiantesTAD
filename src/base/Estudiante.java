@@ -1,20 +1,24 @@
-package tareaTutoria27DeAbril;
+package base;
 
 public class Estudiante {
 	
 	private String nombre;
 	private double Nota;
 	
-	Estudiante(String nombre,Double nota){
+	public Estudiante(String nombre,Double nota){
 		this.nombre = nombre;
 		this.Nota = nota;
 	}
 	
-	void setNota(double nota) {
+	protected void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	protected void setNota(double nota) {
 		this.Nota = nota;
 	}
 	
-	double getNota() {
+	public double getNota() {
 		return Nota;
 	}
 	@Override
