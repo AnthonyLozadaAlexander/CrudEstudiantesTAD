@@ -25,17 +25,19 @@ public class TADVector<T> {
 		return vector[index];
 	}
 	
-	public void imprimirNotas() {
+	public void imprimirDatos() {
 		for (int i = 0; i < vector.length; i++) {
-			if(i==0) System.out.print("[");
+			// if(i==0) System.out.print("[");
+			
 			if(i <= vector.length - 2) {
 			System.out.print(vector[i] + ", ");
 			}else {
 				System.out.print(vector[i]);
 			}
-			if(i == vector.length - 1) {
-				System.out.print("]\n");
-			}
+			
+			//if(i == vector.length - 1) {
+				//System.out.print("]\n");
+			//}
 		}
 	}
 	

@@ -23,9 +23,9 @@ public class Estudiante {
 	}
 	@Override
 	public String toString() {
-		return "       Datos Del Estudiante\n" +
-	           "Nombre: " + nombre + "\n" +
-	           "Nota: " + Nota + "\n";
+		return "        Datos Del Estudiante\n" +
+	           "       Nombre: " + nombre + "\n" +
+	           "       Nota: " + Nota + "\n";
 	}
 
 }

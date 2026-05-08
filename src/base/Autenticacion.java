@@ -5,7 +5,7 @@ public class Autenticacion {
      
      public Autenticacion() {
     	 docentesRegistrados = new Docente[3];
-    	 docentesRegistrados[0] = new Docente("09784576", "23A5", "ING Juan", "Juan@edu.ec");
+    	 docentesRegistrados[0] = new Docente("09784576", "24A5", "ING Juan", "Juan@edu.ec");
     	 docentesRegistrados[1] = new Docente("098567114", "35C7", "ING Pedro", "Pedro@edu.ec");
     	 docentesRegistrados[2] = new Docente("099134567", "64B9", "ING Toni", "Toni@edu.ec");
      }
@@ -20,5 +20,18 @@ public class Autenticacion {
 		}
     	 
     	 return null; // Datos Ingresados Incorrectos
+     }
+     
+     public String datosDocente(String cedula) {
+    	 int index = -1;
+    	 for (int i = 0; i < docentesRegistrados.length; i++) {
+    		 if(docentesRegistrados[i].getCedula().equals(cedula)) {
+    			 index = i;
+    			 i = docentesRegistrados.length; 
+    			 return docentesRegistrados[index].toString();
+    		 }
+		}
+    	 
+    	 return null;
      }
 }
