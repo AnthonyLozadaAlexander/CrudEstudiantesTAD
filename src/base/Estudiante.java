@@ -10,17 +10,18 @@ public class Estudiante {
 		this.Nota = nota;
 	}
 	
-	protected void setNombre(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	
-	protected void setNota(double nota) {
+	public void setNota(double nota) {
 		this.Nota = nota;
 	}
 	
 	public double getNota() {
 		return Nota;
 	}
+	
 	@Override
 	public String toString() {
 		return "        Datos Del Estudiante\n" +

@@ -12,7 +12,7 @@ public class Autenticacion {
      
      public Docente iniciarSesion(String cedula, String contrasenia) {
     	 for (int i = 0; i < docentesRegistrados.length; i++) {
-			Docente doc = docentesRegistrados[i]; // instancia que toma el arreglo docentes registrados
+			Docente doc = docentesRegistrados[i]; // referencia de Docente que toma el arreglo docentes registrados
 			
 			if(doc.getCedula().equals(cedula) && doc.getContrasenia().equals(contrasenia)) {
 				return doc; // Encontro al docente

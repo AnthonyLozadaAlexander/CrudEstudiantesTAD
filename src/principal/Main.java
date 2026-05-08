@@ -20,8 +20,9 @@ public class Main {
 		 int n = 0;
 		 String cedula = "";
 		 String contrasenia = "";
-		 double nota = 0;
-		 double suma = 0, promedio = 0;
+		 double nuevaNota = 0.0;
+		 double nota = 0.0;
+		 double suma = 0.0, promedio = 0.0;
 		 boolean on = false;
 		 
 		 do {
@@ -99,8 +100,28 @@ public class Main {
 			 break;
 			 
 		 case "3":
+			 suma = sumaNotas(vectorE);
+			 promedio = suma / vectorE.getLongitud();
+			 System.out.println("El Promedio Total Del Curso Es: " + promedio);
 			 
 			 break;
+		 case "4":
+			 int index = input.leerInt("Ingrese el indice del estudiante a modificar: ");
+			 if(index >= 0 && index < vectorE.getLongitud()) {
+				 
+				 index = index - 1;
+				 nuevaNota = input.leerDouble("Ingrese la nueva nota para el estudiante: ");
+				 Estudiante eNota = vectorE.obtenerIndex(index); // referencia para guardar el index de referencia
+				 eNota.setNota(nuevaNota);
+				 boolean result = vectorE.modificarNotas(index, eNota);
+				 
+				 if(result) {
+					 System.out.println("Nota Modificada Correctamente");
+				 }else {
+					 System.out.println("Error: No se pudo modificar la nota del Estudiante["+index+"]");
+				 }
+				 
+			 }
 			 
 			 default:
 				 System.out.println("Opcion Invalida, Intente De Nuevo");
@@ -109,10 +130,7 @@ public class Main {
 		 
 		 
 		 
-		 suma = sumaNotas(vectorE);
-		 promedio = suma / vectorE.getLongitud();
 		 
-		 System.out.println("El Promedio Total Del Curso Es: " + promedio);
 		 }catch(IOException e) {
 			 e.getMessage();
 		 }
