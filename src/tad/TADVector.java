@@ -1,15 +1,17 @@
 package tad;
 
+import base.Estudiante;
 
 public class TADVector<T> {
 	
 	private T[] vector;
 	private String nombre;
 	private int longitud;
-	
+	                                    // 2
 	public TADVector(String nombre, int longitud) {
 		this.nombre = nombre;
 		this.longitud = longitud;
+		// [0, 1, 2, 3]
 		vector = (T[]) new Object[longitud];
 	}
 	
@@ -25,12 +27,18 @@ public class TADVector<T> {
 		return vector[index];
 	}
 	
+	public void imprimirEstudiante(int index) {
+		if(vector[index] != null && index >= 0 && index < longitud) {
+			System.out.println(vector[index].toString());
+		}
+	}
+	
 	public void imprimirDatos() {
 		for (int i = 0; i < vector.length; i++) {
 			// if(i==0) System.out.print("[");
-			
+			System.out.println("       Estudiante["+(i+1)+"]");
 			if(i <= vector.length - 2) {
-			System.out.print(vector[i] + ", ");
+			System.out.print(vector[i]);
 			}else {
 				System.out.print(vector[i]);
 			}
@@ -91,19 +99,22 @@ public class TADVector<T> {
 	}
 	
 	
-	public int buscarNotas(T elemento) {
+	public int buscarEstudiante(T elemento) {
 		int index = -1;
-		
+	
 		for (int i = 0; i < vector.length; i++) {
-			if(vector[i] != null && vector[i].equals(elemento)) {
+			if(vector[i] != null) {
+				if(((Estudiante)vector[i]).getNombre().equals(((Estudiante)elemento).getNombre())) {
 				index = i;
 				i = vector.length; // salida del bucle
 			}
 		}
 		
-		return index;
 	}
-	
+		
+		return index; 
+		
+	}
 	
 
 }

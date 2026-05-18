@@ -10,6 +10,10 @@ public class Estudiante {
 		this.Nota = nota;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
