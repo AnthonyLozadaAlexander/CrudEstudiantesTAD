@@ -137,6 +137,7 @@ public class Main {
 					if (vectorE == null) {
 						System.out.println("Error: No hay Estudiantes en el vector/n");
 					} else {
+						try {
 						vectorE.imprimirDatos();
 						int indexNota = input.leerInt("Ingrese el indice del estudiante a eliminar: ");
 						if (indexNota >= 0 && indexNota < vectorE.getLongitud()) {
@@ -145,6 +146,11 @@ public class Main {
 								vectorE.imprimirEstudiante(indexNota - 1);
 								System.out.println("Nota Eliminada Correctamente");
 							}
+						}
+						}catch(NumberFormatException e) {
+							System.out.println("Error: Debe Ingresar Un Numero Valido Para El Indice");
+						} catch (IOException e) {
+							e.getMessage();
 						}
 						
 					}
