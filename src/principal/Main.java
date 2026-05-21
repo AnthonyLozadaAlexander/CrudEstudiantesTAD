@@ -124,7 +124,9 @@ public class Main {
 								nuevaNota = input.leerDouble("Ingrese la nueva nota para el estudiante: ");
 								// Estudiante eNota = vectorE.buscarElemento2(index); // referencia para guardar
 								// el index del estudiante a modificar
-								Estudiante eNota;
+
+								Estudiante eNota = vectorE.leerElemento(index); // referencia para guardar el estudiante a modificar              
+																				
 
 								eNota.setNota(nuevaNota);
 								boolean result = vectorE.modificarElemento(eNota, index);
