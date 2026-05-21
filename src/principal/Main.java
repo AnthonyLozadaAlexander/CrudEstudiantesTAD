@@ -107,14 +107,19 @@ public class Main {
 					break;
 
 				case "3":
+					if(vectorE != null) {
 					suma = sumaNotas(vectorE);
 					promedio = suma / vectorE.getLongitud();
 					System.out.println("El Promedio Total Del Curso Es: " + promedio);
+					}else {
+						System.out.println("No hay Estudiantes Aun En El Vector");
+					}
 
 					break;
 				case "4":
+					try {
 					int index = input.leerInt("Ingrese el indice del estudiante a modificar: ");
-					if (index >= 0 && index < vectorE.getLongitud()) {
+					if (index >= 0 && index < vectorE.getLongitud() && vectorE != null) {
 
 						index = index - 1;
 						nuevaNota = input.leerDouble("Ingrese la nueva nota para el estudiante: ");
@@ -129,13 +134,18 @@ public class Main {
 							System.out.println("Error: No se pudo modificar la nota del Estudiante[" + index + "]");
 						}
 
+					}else {
+						System.out.println("Error: Indice Invalido");
+					}
+					}catch(NumberFormatException e) {
+						System.out.println("Error: Debe Ingresar Un Numero Valido");
 					}
 
 					break;
 
 				case "5":
 					if (vectorE == null) {
-						System.out.println("Error: No hay Estudiantes en el vector/n");
+						System.out.println("Error: No hay Estudiantes en el vector\n");
 					} else {
 						try {
 						vectorE.imprimirDatos();
@@ -159,10 +169,19 @@ public class Main {
 				case "6":
 
 					if (vectorE == null) {
-						System.out.println("Error: No hay Estudiantes en el vector/n");
+						System.out.println("Error: No hay Estudiantes en el vector\n");
 					} else {
 						vectorE.imprimirDatos();
 						nombreBuscar = input.leerString("Ingrese el nombre del estudiante a buscar: ");
+						Estudiante estudianteBuscar;
+						estudianteBuscar = new Estudiante(nombreBuscar, 0.0);
+						int indexE = vectorE.buscarEstudiante(estudianteBuscar);
+						
+						if(indexE != -1) {
+							System.out.println("Estudiante Encontrado: " + vectorE.obtenerIndex(indexE).toString());
+						}else {
+							System.out.println("Error: Estudiante no encontrado");
+						}
 						
 					}
 					break;
@@ -186,9 +205,13 @@ public class Main {
 	 
 	 private static double sumaNotas(TADVector<Estudiante> Estudiantes) {
 		 double suma = 0;
+		 if(Estudiantes == null) {
+			 System.out.println("Error: No Hay Estudiantes En El Vector/n");
+		 }else {
 		 for (int i = 0;i  < Estudiantes.getLongitud(); i++) {
 			 suma = suma + Estudiantes.obtenerIndex(i).getNota();
 		}
+		 }
 			
 		 return suma;
 	 }
