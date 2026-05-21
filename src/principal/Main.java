@@ -23,7 +23,7 @@ public class Main {
 		String contrasenia = "";
 		double nuevaNota = 0.0;
 		double nota = 0.0;
-		double suma = 0.0, promedio = 0.0;
+		double promedio = 0.0;
 		boolean on = false;
 
 		do {
@@ -76,10 +76,10 @@ public class Main {
 				opc = input.leerString("Ingrese Una Opcion: ");
 
 				switch (opc) {
-					case "1":
+					case "1" -> {
 						System.out.println("Ingrese La Cantidad De Estudiantes");
 						n = input.leerInt();
-						vectorE = new TADVector<Estudiante>("Vector Estudiantes", n);
+						vectorE = new TADVector<Estudiante>(n, "Vector Estudiantes");
 
 						for (int i = 0; i < n; i++) {
 							try {
@@ -87,7 +87,7 @@ public class Main {
 								nombre = input.leerString();
 								System.out.println("Ingrese La Nota[" + i + "]");
 								nota = input.leerDouble();
-								vectorE.insertarNotas(i, new Estudiante(nombre, nota));
+								vectorE.insertarElemento(new Estudiante(nombre, nota), i);
 
 							} catch (NumberFormatException e) {
 								i--;
@@ -97,39 +97,41 @@ public class Main {
 								e.getMessage();
 							}
 						}
-						break;
-					case "2":
+					}
+					case "2" -> {
 						if (vectorE != null) {
-							vectorE.imprimirDatos();
+							vectorE.imprimirVector();
 						} else {
 							System.out.println("Error: No Hay Estudiantes En El Vector/n");
 						}
-						break;
+					}
 
-					case "3":
+					case "3" -> {
 						if (vectorE != null) {
-							suma = Promedio(vectorE);
-							promedio = suma / vectorE.getLongitud();
+							promedio = Promedio(vectorE);
 							System.out.println("El Promedio Total Del Curso Es: " + promedio);
 						} else {
 							System.out.println("No hay Estudiantes Aun En El Vector");
 						}
 
-						break;
-					case "4":
+					}
+					case "4" -> {
 						try {
 							int index = input.leerInt("Ingrese el indice del estudiante a modificar: ");
 							if (index >= 0 && index < vectorE.getLongitud() && vectorE != null) {
 
 								index = index - 1;
 								nuevaNota = input.leerDouble("Ingrese la nueva nota para el estudiante: ");
-								Estudiante eNota = vectorE.obtenerIndex(index); // referencia para guardar el index de
-																				// referencia
+								// Estudiante eNota = vectorE.buscarElemento2(index); // referencia para guardar
+								// el index del estudiante a modificar
+								Estudiante eNota;
+
 								eNota.setNota(nuevaNota);
-								boolean result = vectorE.modificarNotas(index, eNota);
+								boolean result = vectorE.modificarElemento(eNota, index);
 
 								if (result) {
 									System.out.println("Nota Modificada Correctamente");
+									vectorE.imprimirVector();
 								} else {
 									System.out.println(
 											"Error: No se pudo modificar la nota del Estudiante[" + index + "]");
@@ -142,19 +144,19 @@ public class Main {
 							System.out.println("Error: Debe Ingresar Un Numero Valido");
 						}
 
-						break;
+					}
 
-					case "5":
+					case "5" -> {
 						if (vectorE == null) {
 							System.out.println("Error: No hay Estudiantes en el vector\n");
 						} else {
 							try {
-								vectorE.imprimirDatos();
+								vectorE.imprimirVector();
 								int indexNota = input.leerInt("Ingrese el indice del estudiante a eliminar: ");
 								if (indexNota >= 0 && indexNota < vectorE.getLongitud()) {
-									boolean eliminarNota = vectorE.EliminarNotas(indexNota - 1);
+									boolean eliminarNota = vectorE.eliminarElemento(indexNota - 1);
 									if (eliminarNota) {
-										vectorE.imprimirEstudiante(indexNota - 1);
+										vectorE.leerElemento(indexNota - 1);
 										System.out.println("Nota Eliminada Correctamente");
 									}
 								}
@@ -165,36 +167,38 @@ public class Main {
 							}
 
 						}
-						break;
+					}
 
-					case "6":
+					case "6" -> {
 
 						if (vectorE == null) {
 							System.out.println("Error: No hay Estudiantes en el vector\n");
 						} else {
-							vectorE.imprimirDatos();
+							vectorE.imprimirVector();
 							nombreBuscar = input.leerString("Ingrese el nombre del estudiante a buscar: ");
+
 							Estudiante estudianteBuscar;
 							estudianteBuscar = new Estudiante(nombreBuscar, 0.0);
-							int indexE = vectorE.buscarEstudiante(estudianteBuscar);
+
+							int indexE = vectorE.buscarElemento2(estudianteBuscar);
 
 							if (indexE != -1) {
-								System.out.println("Estudiante Encontrado: " + vectorE.obtenerIndex(indexE).toString());
+								System.out.println("Estudiante Encontrado: " + vectorE.leerElemento(indexE).toString());
 							} else {
 								System.out.println("Error: Estudiante no encontrado");
 							}
 
 						}
-						break;
+					}
 
-					case "7":
+					case "7" -> {
 						System.out.println("Saliendo del Sistema...");
 						on = true;
-						break;
+					}
 
-					default:
+					default -> {
 						System.out.println("Opcion Invalida, Intente De Nuevo");
-						break;
+					}
 				}
 
 			} catch (IOException e) {
@@ -206,8 +210,11 @@ public class Main {
 
 	private static double Promedio(TADVector<Estudiante> Estudiantes) {
 		double suma = 0;
+
 		for (int i = 0; i < Estudiantes.getLongitud(); i++) {
-			suma = suma + Estudiantes.obtenerIndex(i).getNota();
+			if (Estudiantes.leerElemento(i) != null) {
+				suma = suma + Estudiantes.leerElemento(i).getNota();
+			}
 		}
 		return suma / Estudiantes.getLongitud();
 	}
